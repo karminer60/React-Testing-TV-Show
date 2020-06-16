@@ -18,7 +18,11 @@ export default function App() {
 
   useEffect(() => {
     
-    fetchShow();
+    fetchShow()
+      .then( res => {
+        setShow(res.data);
+        setSeasons(formatSeasons(res.data._embedded.episodes));
+      });
   }, []);
 
   const handleSelect = e => {
@@ -44,3 +48,5 @@ export default function App() {
     </div>
   );
 }
+
+
