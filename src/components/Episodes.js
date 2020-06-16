@@ -4,6 +4,7 @@ import parse from 'html-react-parser';
 export default function Episodes(props) {
   return (
     <div data-testid= 'episodes' className="episodes">
+      debugger;
       {props.episodes.map(e => (
         <div className="episode" key={e.id}>
           {e.image && (
