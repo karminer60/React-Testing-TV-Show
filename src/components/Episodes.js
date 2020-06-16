@@ -1,9 +1,11 @@
 import React from 'react';
 import parse from 'html-react-parser';
-
+debugger;
 export default function Episodes(props) {
+  debugger;
   return (
-    <div className="episodes">
+    <div data-testid= 'episodes' className="episodes">
+      
       {props.episodes.map(e => (
         <div className="episode" key={e.id}>
           {e.image && (
