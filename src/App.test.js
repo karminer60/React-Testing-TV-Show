@@ -2,10 +2,8 @@ import React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
-import { fetchShow as mockFetchSeasons } from "./api/fetchShow";
-​
+import { fetchShow as mockFetchShows } from "./api/fetchShow";
 jest.mock("./api/fetchShow");
-​
 const showData = {
   data: [
     {
@@ -608,28 +606,21 @@ const showData = {
       }
   ]
 };
-​
 test("successfully renders data from api", async () => {
-  mockFetchSeasons.mockResolvedValueOnce(showData);
+  mockFetchShows.mockResolvedValueOnce(showData);
   // render app - shows Get Data button
-  const { getByRole, findByText, getAllByTestId } = render(<App />);
-​
+  const { getByRole, findByText, getAllByTestId } = render(<App/>);
   const button = getByRole("button", { name: /Select a season/i });
-​
   // click on Get Data btn
   //   - fetching message is rendered
   //   - API call is initiated
   userEvent.click(button);
-​
   await findByText(/season 1/i);
-​
   // Component waits for API, then renders data that is returned
   // change the test CB function to an async/await test
   // use the "waitFor" function to await (wait) for the API call to resolve
-​
   await waitFor(() => {
     expect(getAllByTestId(/Dropdown-root is-open/)).toHaveLength(3);
   });
-​
   expect(mockFetchShows).toHaveBeenCalled();
 });
