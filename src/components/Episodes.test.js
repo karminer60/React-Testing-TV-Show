@@ -66,12 +66,12 @@ const episodesTestData =  [
       }
     },
 ]
-test("re-renders correctly with episodes", () => {
+test.only("re-renders correctly with episodes", () => {
   // arrange (render the component and set up mock data)
   
   const { rerender, getAllByTestId } = render(<Episodes episodes={episodesTestData} />);
   // act (re-render the component with missions data passed in)
-  rerender(<Episodes epsiodes={episodesTestData} />)
+  rerender(<Episodes episodes={episodesTestData} />)
   const episodes = getAllByTestId(/episode/i); // getAll* returns an array if it finds multiple elements
   // assert
   expect(episodes).toHaveLength(1);

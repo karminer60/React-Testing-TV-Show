@@ -609,18 +609,18 @@ const showData = {
 test("successfully renders data from api", async () => {
   mockFetchShows.mockResolvedValueOnce(showData);
   // render app - shows Get Data button
-  const { getByRole, findByText, getAllByTestId } = render(<App/>);
-  const button = getByRole("button", { name: /Select a season/i });
+  const { getByRole, findByText, getAllByTestId } = render(<App options={options}/>);
+  const opsions = getByRole(options, { name: /Select a season/i });
   // click on Get Data btn
   //   - fetching message is rendered
   //   - API call is initiated
-  userEvent.click(button);
-  await findByText(/season 1/i);
+  userEvent.handleSelect(options);
+  await findByText(/fetching data/i);
   // Component waits for API, then renders data that is returned
   // change the test CB function to an async/await test
   // use the "waitFor" function to await (wait) for the API call to resolve
   await waitFor(() => {
-    expect(getAllByTestId(/Dropdown-root is-open/)).toHaveLength(3);
+    expect(getAllByTestId(/Dropdown-root is-open/));
   });
   expect(mockFetchShows).toHaveBeenCalled();
 });
